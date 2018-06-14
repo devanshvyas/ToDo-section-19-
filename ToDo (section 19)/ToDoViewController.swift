@@ -10,17 +10,32 @@ import UIKit
 
 class ToDoViewController: UITableViewController {
     //MARK- variables:-
-    var tempArray = ["hello","hey"]
+    var itemsArray = [String]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //MARK - Navigation bar Add item Button
+    @IBAction func addItem(_ sender: UIBarButtonItem) {
+        var addItem = UITextField()
+        let alert = UIAlertController(title: "Add new Item in List 🤓", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            if addItem.text != "" {
+                self.itemsArray.append(addItem.text!)
+                self.tableView.reloadData()
+            }
+        }
+        
+        alert.addTextField { (insertedText) in
+            insertedText.placeholder = "What you want to be remembered?!"
+            addItem = insertedText
+        }
+        alert.addAction(action)
+        present(alert,animated: true,completion: nil)
     }
-    
     
 
 }
@@ -28,12 +43,12 @@ class ToDoViewController: UITableViewController {
 extension ToDoViewController{
     //MARK - tableView DataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tempArray.count
+        return itemsArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "toDoCell")
-        cell.textLabel?.text = tempArray[indexPath.row]
+        cell.textLabel?.text = itemsArray[indexPath.row]
         return cell
     }
     
