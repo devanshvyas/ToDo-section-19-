@@ -11,11 +11,15 @@ import UIKit
 class ToDoViewController: UITableViewController {
     //MARK- variables:-
     var itemsArray = [String]()
-    
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        if let items = defaults.array(forKey: "addedItems") as? [String]{
+            itemsArray = items
+        }
+
     }
 
     //MARK - Navigation bar Add item Button
@@ -25,6 +29,7 @@ class ToDoViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             if addItem.text != "" {
                 self.itemsArray.append(addItem.text!)
+                self.defaults.set(self.itemsArray, forKey: "addedItems")
                 self.tableView.reloadData()
             }
         }
