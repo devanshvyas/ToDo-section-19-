@@ -7,34 +7,39 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoViewController: UITableViewController {
     //MARK- variables:-
-    var itemsArray = [ItemsData]()
-//    let defaults = UserDefaults.standard
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var itemsArray = [Items]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
- //        if let items = defaults.array(forKey: "addedItems") as? [String]{
-//            itemsArray = items
-//        }
+        let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+        print(file)
+        loadData()
     }
 
     //MARK - Navigation bar Add item Button
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         var addItem = UITextField()
         let alert = UIAlertController(title: "Add new Item in List 🤓", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+        let action = UIAlertAction(title: "Add Item", style: .default) {
+            (action) in
             if addItem.text != "" {
-                var item = ItemsData()
-                item.items = addItem.text!
-                self.itemsArray.append(item)
-               //self.defaults.set(self.itemsArray, forKey: "addedItems")
-                self.tableView.reloadData()
+                let newItem = Items(context: self.context)
+            
+                newItem.check = false
+                newItem.title = addItem.text!
+                self.itemsArray.append(newItem)
+                self.saveData()
+                
             }
         }
         
-        alert.addTextField { (insertedText) in
+        alert.addTextField {
+            (insertedText) in
             insertedText.placeholder = "What you want to be remembered?!"
             addItem = insertedText
         }
@@ -42,34 +47,8 @@ class ToDoViewController: UITableViewController {
         present(alert,animated: true,completion: nil)
     }
     
-
 }
 
-extension ToDoViewController{
-    //MARK - tableView DataSource
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemsArray.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "toDoCell")
-        cell.textLabel?.text = itemsArray[indexPath.row].items
-        cell.accessoryType = itemsArray[indexPath.row].check ? .checkmark : .none
-        return cell
-    }
-    
-    
-    //MARK - tableView Delegates
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        itemsArray[indexPath.row].check = !itemsArray[indexPath.row].check
-        tableView.reloadData()
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 
 
 
-
-
-
-
-}
