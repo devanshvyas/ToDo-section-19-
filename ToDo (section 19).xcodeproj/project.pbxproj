@@ -16,6 +16,7 @@
 		05D126EC20D3C0ED006BCB44 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D126EB20D3C0ED006BCB44 /* SearchBar.swift */; };
 		05D126EE20D3C639006BCB44 /* SaveLoadFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D126ED20D3C639006BCB44 /* SaveLoadFunc.swift */; };
 		05D126F020D3C692006BCB44 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D126EF20D3C692006BCB44 /* TableView.swift */; };
+		05D126F620D3D14E006BCB44 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D126F520D3D14E006BCB44 /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		05D126EB20D3C0ED006BCB44 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		05D126ED20D3C639006BCB44 /* SaveLoadFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoadFunc.swift; sourceTree = "<group>"; };
 		05D126EF20D3C692006BCB44 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		05D126F520D3D14E006BCB44 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		05BA692020D2576D00195E98 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				05D126F520D3D14E006BCB44 /* CategoryViewController.swift */,
 				05BA690F20D230C700195E98 /* ToDoViewController.swift */,
 				05BA690D20D230C700195E98 /* AppDelegate.swift */,
 				05D126EB20D3C0ED006BCB44 /* SearchBar.swift */,
@@ -181,6 +184,7 @@
 			files = (
 				05D126EE20D3C639006BCB44 /* SaveLoadFunc.swift in Sources */,
 				05D126F020D3C692006BCB44 /* TableView.swift in Sources */,
+				05D126F620D3D14E006BCB44 /* CategoryViewController.swift in Sources */,
 				05BA691020D230C700195E98 /* ToDoViewController.swift in Sources */,
 				05D126EC20D3C0ED006BCB44 /* SearchBar.swift in Sources */,
 				05BA690E20D230C700195E98 /* AppDelegate.swift in Sources */,

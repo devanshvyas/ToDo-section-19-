@@ -13,10 +13,25 @@ import CoreData
 extension ToDoViewController: UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        textChanged(searchText: searchBar.text!)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0{
+            loadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }else{
+            textChanged(searchText: searchBar.text!)
+        }
         
+    }
+    
+    func textChanged(searchText : String){
         let request : NSFetchRequest<Items> = Items.fetchRequest()
         
-        let predicate = NSPredicate(format: "title CONTAINS %@", searchBar.text!)
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchText)
         request.predicate = predicate
         
         let sortDescriptors = NSSortDescriptor(key: "title", ascending: true)
@@ -24,8 +39,6 @@ extension ToDoViewController: UISearchBarDelegate{
         
         loadData(request: request)
         tableView.reloadData()
-    
     }
-    
     
 }
