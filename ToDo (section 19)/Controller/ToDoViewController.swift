@@ -8,11 +8,12 @@
 
 import UIKit
 import CoreData
+import SwipeCellKit
+import ChameleonFramework
 
-class ToDoViewController: UITableViewController {
+class ToDoViewController: Delete{
     //MARK: variables
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var itemsArray = [Items]()
+    var itemsArray : [Items?] = [Items]()
     var selectedCategory : Lists? {
         didSet{
             loadData()
@@ -20,13 +21,34 @@ class ToDoViewController: UITableViewController {
     }
     
     
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         print(file ?? "nil")
+        tableView.rowHeight = 70
         
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        let clr = UIColor(hexString: (selectedCategory?.hexColor)!)
+        color(colour: clr)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        color(colour: UIColor(hexString: "0096FF"))
+    }
+    
+    func color(colour : UIColor?) {
+        if let uicolor = colour{
+            navigationController?.navigationBar.barTintColor = uicolor
+            navigationController?.navigationBar.tintColor = ContrastColorOf(uicolor, returnFlat: true)
+            title = selectedCategory?.name
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : ContrastColorOf(uicolor, returnFlat: true)]
+            searchBar.barTintColor = uicolor
+        }
+    }
+    
     //MARK: - Navigation bar Add item Button
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         var addItem = UITextField()
@@ -53,6 +75,19 @@ class ToDoViewController: UITableViewController {
         }
         alert.addAction(action)
         present(alert,animated: true,completion: nil)
+    }
+    
+    
+    override func deleteObj(index: Int) {
+        if let item = itemsArray[index]{
+            itemsArray.remove(at: index)
+            context.delete(item)
+            do{
+             try context.save()
+            }catch{
+                print(error)
+            }
+        }
     }
     
 }

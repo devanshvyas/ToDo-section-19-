@@ -9,15 +9,18 @@
 import UIKit
 import CoreData
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController : Delete{
 
     //MARK: variables
     var categoryArray : [Lists] = [Lists]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-   override func viewDidLoad() {
+    @IBOutlet weak var searchBar: UISearchBar!
+    override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        tableView.rowHeight = 80
+        searchBar.barTintColor = UIColor(hexString: "0096FF")
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.flatWhite]
     }
     
     //MARK: Add Category Button
@@ -34,6 +37,10 @@ class CategoryViewController: UITableViewController {
             if textField.text?.count != 0 {
                 let newObj = Lists(context: self.context)
                 newObj.name = textField.text
+                
+                let hex = UIColor.randomFlat.hexValue()
+                newObj.hexColor = hex
+                
                 self.categoryArray.append(newObj)
                 self.saveData()
             }
@@ -56,5 +63,16 @@ class CategoryViewController: UITableViewController {
         if let index = tableView.indexPathForSelectedRow{
             destination.selectedCategory = categoryArray[index.row]
         }
+    }
+    
+    override func deleteObj(index: Int) {
+        context.delete(categoryArray[index])
+        categoryArray.remove(at: index)
+        do{
+            try context.save()
+        }catch{
+            print(error)
+        }
+        
     }
 }

@@ -6,11 +6,12 @@
         <relationship name="itemName" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lists" inverseName="itemCategory" inverseEntity="Lists" syncable="YES"/>
     </entity>
     <entity name="Lists" representedClassName=".Lists" syncable="YES" codeGenerationType="class">
+        <attribute name="hexColor" attributeType="String" defaultValueString="#ffffff" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="itemCategory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Items" inverseName="itemName" inverseEntity="Items" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Items" positionX="16" positionY="2" width="128" height="88"/>
-        <element name="Lists" positionX="-225" positionY="9" width="128" height="73"/>
+        <element name="Items" positionX="16" positionY="2" width="128" height="90"/>
+        <element name="Lists" positionX="-225" positionY="9" width="128" height="88"/>
     </elements>
 </model>

@@ -17,7 +17,7 @@ extension ToDoViewController: UISearchBarDelegate{
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0{
+        if searchBar.text == ""{
             loadData()
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
@@ -51,8 +51,11 @@ extension CategoryViewController: UISearchBarDelegate{
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0 {
+        if searchBar.text == "" {
             loadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
         }
         else{
             textChanged(searchText: searchBar.text!)
