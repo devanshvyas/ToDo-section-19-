@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: ToDo
 extension ToDoViewController{
     //MARK: - tableView DataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,6 +33,8 @@ extension ToDoViewController{
     
 }
 
+
+//MARK: Category
 extension CategoryViewController {
     //MARK: tableView Datasource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,4 +46,10 @@ extension CategoryViewController {
         cell.textLabel?.text = categoryArray[indexPath.row].name
         return cell
     }
+    
+    //MARK: tableview Delegates
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toToDoList", sender: self)
+    }
+    
 }

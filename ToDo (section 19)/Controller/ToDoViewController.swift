@@ -10,18 +10,24 @@ import UIKit
 import CoreData
 
 class ToDoViewController: UITableViewController {
-    //MARK- variables:-
+    //MARK: variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var itemsArray = [Items]()
+    var selectedCategory : Lists? {
+        didSet{
+            loadData()
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        print(file)
-        loadData()
+        print(file ?? "nil")
+        
     }
 
-    //MARK - Navigation bar Add item Button
+    //MARK: - Navigation bar Add item Button
     @IBAction func addItem(_ sender: UIBarButtonItem) {
         var addItem = UITextField()
         let alert = UIAlertController(title: "Add new Item in List 🤓", message: "", preferredStyle: .alert)
@@ -32,6 +38,8 @@ class ToDoViewController: UITableViewController {
             
                 newItem.check = false
                 newItem.title = addItem.text!
+                newItem.itemName = self.selectedCategory
+                
                 self.itemsArray.append(newItem)
                 self.saveData()
                 

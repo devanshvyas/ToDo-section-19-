@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+//MARK: ToDo
 extension ToDoViewController{
 
     func saveData() {
@@ -16,16 +17,46 @@ extension ToDoViewController{
             try context.save()
         }
         catch{
-            print("here comes the error: \(error)")
+            print("error while saving data \(error)")
         }
         self.tableView.reloadData()
     }
     
-    func loadData(request : NSFetchRequest<Items> = Items.fetchRequest()) {
+    func loadData(request : NSFetchRequest<Items> = Items.fetchRequest() , predicate: NSPredicate? = nil) {
+        let CategoryPredicate = NSPredicate(format: "itemName.name MATCHES %@", selectedCategory!.name!)
+        if let newPre = predicate{
+            let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [CategoryPredicate,newPre])
+            request.predicate = compoundPredicate
+        }
+        else{
+            request.predicate = CategoryPredicate
+        }
         do{
             itemsArray = try context.fetch(request)
         }catch{
-            print(error)
+            print("error while loading: \(error)")
+        }
+    }
+    
+}
+
+//MARK: Category
+extension CategoryViewController{
+    func saveData() {
+        do{
+            try context.save()
+        }
+        catch{
+            print("error while saving data: \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    func loadData(request : NSFetchRequest<Lists> = Lists.fetchRequest()) {
+        do{
+            categoryArray = try context.fetch(request)
+        }catch{
+            print("error while loading:\(error)")
         }
     }
     
