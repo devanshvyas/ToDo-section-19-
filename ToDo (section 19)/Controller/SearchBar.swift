@@ -22,6 +22,7 @@ extension ToDoViewController: UISearchBarDelegate{
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
+            tableView.reloadData()
         }else{
             textChanged(searchText: searchBar.text!)
         }
@@ -56,6 +57,7 @@ extension CategoryViewController: UISearchBarDelegate{
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
+            tableView.reloadData()
         }
         else{
             textChanged(searchText: searchBar.text!)

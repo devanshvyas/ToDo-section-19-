@@ -42,6 +42,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Category" id="wST-od-HLq" userLabel="Category">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Kos-rg-n4B">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButton:" destination="m3A-g3-Lap" id="OGe-sH-kpf"/>
                             </connections>

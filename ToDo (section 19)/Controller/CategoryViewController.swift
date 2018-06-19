@@ -10,11 +10,13 @@ import UIKit
 import CoreData
 
 class CategoryViewController : Delete{
+    
 
     //MARK: variables
     var categoryArray : [Lists] = [Lists]()
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -65,14 +67,6 @@ class CategoryViewController : Delete{
         }
     }
     
-    override func deleteObj(index: Int) {
-        context.delete(categoryArray[index])
-        categoryArray.remove(at: index)
-        do{
-            try context.save()
-        }catch{
-            print(error)
-        }
-        
-    }
+    
+    
 }

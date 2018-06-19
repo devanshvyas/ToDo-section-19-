@@ -3,12 +3,12 @@
     <entity name="Items" representedClassName=".Items" syncable="YES" codeGenerationType="class">
         <attribute name="check" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
-        <relationship name="itemName" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lists" inverseName="itemCategory" inverseEntity="Lists" syncable="YES"/>
+        <relationship name="itemName" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="Lists" inverseName="itemCategory" inverseEntity="Lists" syncable="YES"/>
     </entity>
     <entity name="Lists" representedClassName=".Lists" syncable="YES" codeGenerationType="class">
         <attribute name="hexColor" attributeType="String" defaultValueString="#ffffff" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="itemCategory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Items" inverseName="itemName" inverseEntity="Items" syncable="YES"/>
+        <relationship name="itemCategory" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Items" inverseName="itemName" inverseEntity="Items" syncable="YES"/>
     </entity>
     <elements>
         <element name="Items" positionX="16" positionY="2" width="128" height="90"/>

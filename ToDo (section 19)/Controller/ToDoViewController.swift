@@ -11,6 +11,7 @@ import CoreData
 import SwipeCellKit
 import ChameleonFramework
 
+
 class ToDoViewController: Delete{
     //MARK: variables
     var itemsArray : [Items?] = [Items]()
@@ -22,12 +23,12 @@ class ToDoViewController: Delete{
     
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let file = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
         print(file ?? "nil")
         tableView.rowHeight = 70
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -64,10 +65,8 @@ class ToDoViewController: Delete{
                 
                 self.itemsArray.append(newItem)
                 self.saveData()
-                
             }
         }
-        
         alert.addTextField {
             (insertedText) in
             insertedText.placeholder = "What you want to be remembered?!"
@@ -89,6 +88,7 @@ class ToDoViewController: Delete{
             }
         }
     }
+    
     
 }
 
